@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments.html :: headerfiles">
+
+</head>
+<body>
+
+<header th:insert="fragments.html :: header"> </header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <h3>Δημιουργία Καρτέλας Φοιτητή</h3>
+
+            <form action="#" th:action="@{/create_user}" th:object="${user}" method="post">
+
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" th:field="*{username}" th:required="required">
+                </div>
+
+                <div class="form-group">
+                    <label>Όνομα</label>
+                    <input type="text" class="form-control" th:field="*{firstName}" th:required="required">
+                </div>
+
+                <div class="form-group">
+                    <label>Επώνυμο</label>
+                    <input type="text" class="form-control" th:field="*{lastName}" th:required="required">
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" th:field="*{email}" th:required="required">
+                </div>
+
+                <div class="form-group">
+                    <label>Κωδικός</label>
+                    <input type="text" class="form-control" th:field="*{password}" th:required="required">
+                </div>
+
+                <div class="form-group">
+                    <label>Ημερομηνία γέννησης</label>
+                    <input type="date" class="form-control" th:field="*{dateOfBirth}" th:required="required">
+                </div>
+
+                <div class="form-group">
+                    <label>Τμήμα</label>
+                    <select class="form-control" th:field="*{department}">
+                        <option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.name}" ></option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Καταχώρηση</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/webjars/bootstrap/4.1.3/js"></script>
+
+</html>
