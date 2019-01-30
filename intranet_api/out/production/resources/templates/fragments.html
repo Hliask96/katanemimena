@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerfiles">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+    <link th:href="@{/styles.css}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+<div th:fragment="header">
+
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Εσωτερικό Σύστημα Διαχείρησης Στέγασης</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <!--<li class="nav-item active">-->
+                    <!--<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
+                <!--</li>-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/intranet/users">Χρήστες</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/intranet/katataxi">Κατάταξη</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/intranet/create_user">Δημιουργία Χρήστη</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/intranet/update_settings">Όριο εστίας</a>
+                </li>
+                <!--<li class="nav-item dropdown"> th:if="${#authentication.getPrincipal().getUser().getRoles().iterator().next().equals('create_new_user')} == 0" >-->
+                    <!--<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                        <!--Dropdown-->
+                    <!--</a>-->
+                    <!--<div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+                        <!--<a class="dropdown-item" href="#">Action</a>-->
+                        <!--<a class="dropdown-item" href="#">Another action</a>-->
+                        <!--<div class="dropdown-divider"></div>-->
+                        <!--<a class="dropdown-item" href="#">Something else here</a>-->
+                    <!--</div>-->
+                <!--</li>-->
+            </ul>
+            <a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
+
+            <form class="form-inline my-2 my-lg-0" name="logoutForm" th:action="@{/intranet/logout}" method="post" th:hidden="true">
+                <input hidden type="submit" value="Sign Out"/>
+            </form>
+        </div>
+    </nav>
+
+
+</div>
+<p>Go to the next page to see fragments in action</p>
+<aside>
+    <div>This is a sidebar</div>
+</aside>
+<div class="another">This is another sidebar</div>
+<footer th:fragment="footer">
+    <a th:href="@{/fragments}">Fragments Index</a> |
+    <a th:href="@{/markup}">Markup inclussion</a> |
+    <a th:href="@{/params}">Fragment params</a> |
+    <a th:href="@{/other}">Other</a>
+</footer>
+</body>
+</html>

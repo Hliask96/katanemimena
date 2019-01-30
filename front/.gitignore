@@ -1,7 +1,5 @@
 .gradle
 /build/
-/front/build/
-/intranet_api/build/
 !gradle/wrapper/gradle-wrapper.jar
 
 ### STS ###

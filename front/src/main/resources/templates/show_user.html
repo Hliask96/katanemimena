@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments.html :: headerfiles">
+</head>
+<body>
+<header th:insert="fragments.html :: header"> </header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <h3>Χρήστης <span th:text="${user.username}"></span> Ονοματεπώνυμο: <span th:text="${user.firstName}"></span> <span th:text="${user.lastName}"></span></h3>
+            <h4>Τμήμα <span th:text="${user.department.getName()}"></span></h4>
+            <h4>Ημερομηνία Γέννησης <span th:text="${user.dateOfBirth}"></span></h4>
+
+            Στοιχεία Επικοινωνίας:
+
+            <form action="#" th:action="@{/users/{id}(id=${user.id})}" th:object="${user}" method="POST">
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" th:field="*{email}" th:required="required">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Καταχώρηση</button>
+            </form>
+
+            <br/>
+            <br/>
+
+            <h3>Αίτηση Χρήστη</h3>
+            <td th:if="${newApp}">
+                Δεν έχετε κάνει ακόμα αίτηση στέγασης
+
+                <form action="#" th:action="@{/create_application}" th:object="${application}" method="POST">
+
+                    <div class="form-group">
+                        <label>Εισόδημα γονέων</label>
+                        <input type="number" class="form-control" th:field="*{eisodima}" th:required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Αριθμός αδερφιών στην ίδια πόλη</label>
+                        <input type="number" class="form-control" th:field="*{aderfia_stin_idia_poli}" th:required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Αριθμός αδερφιών σε διαφορετική πόλη</label>
+                        <input type="number" class="form-control" th:field="*{aderfia_se_diaforetiki_poli}" th:required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Έτος Φοίτησης</label>
+                        <input type="number" class="form-control" th:field="*{year}" th:required="required">
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">Αίτηση</button>
+                </form>
+
+
+            </td>
+
+
+
+            <td th:if="${user.application}">
+                Κατάσταση αίτησης:
+                <span th:text="${user.application.status}">  </span>
+
+                <th:block th:switch="${user.application.status}">
+                    <div th:case="0">
+                        <div class="alert-success">Σε εκκρεμότητα.</div>
+                    </div>
+                    <div th:case="2">
+                        <div class="alert-danger">Η αίτηση απορρίφθηκε.</div>
+                    </div>
+
+                    <div th:case="1">
+                        <div class="alert-success">Η αίτηση έγινε δεκτή.</div>
+                        Η θέση σας στην κατάταξη είναι: <b><span th:text="${spot}"></span></b> <br/>
+                        <td th:if="${stegasi}">
+                            Δικαιούστε δωρεάν στέγαση.
+                        </td>
+                        <td th:if="${lefta}">
+                            Δικαιούστε επίδομα στέγασης.
+                        </td>
+                        <td th:if="${tipota}">
+                            Η θέση σας είναι χαμηλή και δεν δικαιούστε κάποιο προνόμιο.
+                        </td>
+
+                    </div>
+                </th:block>
+            </td>
+
+
+            <!--<table class="table">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th> Εισόδημα </th>-->
+                    <!--<th> Αδέρφια στην ίδια πόλη </th>-->
+                    <!--<th> Αδέρφια σε διαφορετική πόλη </th>-->
+                    <!--<th> Έτος στην εστία </th>-->
+                    <!--<th> Κατάσταση αίτησης </th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--<td><span th:text="${app.eisodima}"> </span></td>-->
+                <!--<td><span th:text="${app.aderfia_stin_idia_poli}"> </span></td>-->
+                <!--<td><span th:text="${app.aderfia_se_diaforetiki_poli}"> </span></td>-->
+                <!--<td><span th:text="${app.year}"></span></td>-->
+                <!--<td><span th:text="${app.status}"></span></td>-->
+                <!--</tbody>-->
+            <!--</table>-->
+            <!--<form action="#" th:action="@{/change_application_status/{id}(id=${app.id})}" th:object="${app}" method="post">-->
+                <!--<div class="form-group">-->
+                    <!--<h4>Αλλαγή κατάστασης αίτησης</h4>-->
+
+                    <!--<div class="form-group">-->
+                        <!--<label>Κατάσταση</label>-->
+                        <!--<select class="form-control" th:field="*{status}">-->
+                            <!--<option th:value="0" th:text="Αναμονή"></option>-->
+                            <!--<option th:value="1" th:text="Δεκτή"></option>-->
+                            <!--<option th:value="2" th:text="Απορρίφθηκε"></option>-->
+                        <!--</select>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+
+                <!--<button type="submit" class="btn btn-primary">Καταχώρηση</button>-->
+            <!--</form>-->
+
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
